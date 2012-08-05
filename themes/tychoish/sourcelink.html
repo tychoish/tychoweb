@@ -1,0 +1,33 @@
+{#
+    basic/sourcelink.html
+    ~~~~~~~~~~~~~~~~~~~~~
+
+    Sphinx sidebar template: "show source" link.
+
+    :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
+#}
+{%- if show_source and has_source and sourcename %}
+  <h3>{{ _('Resources') }}</h3>
+  <ul class="this-page-menu">
+    <li><a href="{{ pathto('_sources/' + sourcename, true)|e }}"
+           rel="nofollow">{{ _('Page Source') }}</a></li>
+    <li><a href="http://git.cyborginstitute.net/?p={{ theme_project }}.git">git repository</a></li>
+    <li><a href="http://github.com/tychoish/{{ theme_project }}">git repository</a> (github)</li>
+    <!-- <li><a href="http://lists.cyborginstitute.net/listinfo/tycoish">tychoish listserv</a></li> -->
+  </ul>
+{%- endif %}
+
+<h3>About</h3>
+
+<p>
+  tychoish is the handle of writer/hacker/blogger Sam Kleinman (sometimes writing as tycho garen.) 
+  He blogs and writes, on <a href="http://tychoish.com/">tychoish.com</a>, which is a wiki/blog hybrid, and
+  hosts projects on the <a href="http://cyborginstitute.org/">Cyborg Institute</a>. By contrast 
+  <a href="http://tychoish.net">tychoish.net</a> is a simple and minimal portfolio for non-wiki/blog content.
+</p>
+
+<ul class="this-page-menu">
+  <li><a href="http://cyborginstitute.org/">Cyborg Institute</a></li>
+  <li><a href="http://tychoish.com">tychoish.com</a></li>
+</ul>
