@@ -1,0 +1,76 @@
+# Internal variables.
+PAPEROPT_a4	= -D latex_paper_size=a4
+PAPEROPT_letter = -D latex_paper_size=letter
+ALLSPHINXOPTS = -q -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
+
+ifeq ($(UNAME), Linux)
+SED_ARGS_FILE = -i -r
+SED_ARGS_REGEX = -r
+endif
+ifeq ($(UNAME), Darwin)
+SED_ARGS_FILE = -i "" -E
+SED_ARGS_REGEX = -E
+endif
+
+# Makefile for Sphinx documentation
+#
+
+# You can set these variables from the command line.
+SPHINXOPTS    = -c ./
+SPHINXBUILD   = sphinx-build
+PAPER	      =
+BUILDDIR      = build
+
+#
+# Incremental Push and Publication System
+#
+
+SITESTAGE = ~/projects/tychoweb/build/output
+# legacy cyborg institute value: $(subst projects/tychoweb,projects/output,$(CURDIR))
+STAGEDIR = $(SITESTAGE)
+
+project-push:$(STAGEDIR)
+	rsync -arz $(SITESTAGE)/ institute@foucault.cyborginstitute.net:/home/institute/public
+$(STAGEDIR):$(BUILDDIR)/publish
+	mkdir -p $@
+	cp -R $</* $@
+	touch $(CURDIR)/source/index.txt
+
+#
+# PDF Build System
+#
+
+pdfs:$(subst .tex,.pdf,$(wildcard $(BUILDDIR)/latex/*.tex))
+
+PDFLATEXCOMMAND = TEXINPUTS=".:$(BUILDDIR)/latex/:" pdflatex --interaction batchmode --output-directory $(BUILDDIR)/latex/
+
+%.pdf:%.tex
+	@$(PDFLATEXCOMMAND) $(LATEXOPTS) '$<' >|$@.log
+	@echo "[PDF]: (1/4) pdflatex $<"
+	@-makeindex -s $(BUILDDIR)/latex/python.ist '$(basename $<).idx' >>$@.log 2>&1
+	@echo "[PDF]: (2/4) Indexing: $(basename $<).idx"
+	@$(PDFLATEXCOMMAND) $(LATEXOPTS) '$<' >>$@.log
+	@echo "[PDF]: (3/4) pdflatex $<"
+	@$(PDFLATEXCOMMAND) $(LATEXOPTS) '$<' >>$@.log
+	@echo "[PDF]: (4/4) pdflatex $<"
+	@echo "[PDF]: see '$@.log' for a full report of the pdf build process."
+
+########################################################################
+
+.PHONY:	 clean html dirhtml singlehtml epub latex text man publish
+
+html:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo "[HTML] build complete."
+
+dirhtml:
+	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
+	@echo "[DIR] build complete."
+
+singlehtml:
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
+	@echo "[SINGLE] build complete."
+
+linkcheck:
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
+	@echo "[LINK] link check complete."
