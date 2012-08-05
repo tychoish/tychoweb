@@ -1,0 +1,49 @@
+============
+tychoish.net
+============
+
+Projects
+--------
+
+`Open Help 2012`_ materials and slides from a presentation I gave at
+the `Open Help Conference`_ on documentation for developers called
+"*Documentation is code is Documentation.*"
+
+`Systems Administration for Cyborgs`_ a `Cyborg Institute`_ project
+that introduces basic systems administration concepts and topics
+targeted at developers and other technical users without systems
+backgrounds.
+
+.. _`Open Help 2012`: http://tychoish.net/oh-2012
+.. _`Open Help Conference`: http://openhelpconference.com/
+.. _`Systems Administration for Cyborgs`: http://cyborginstitute.org/projects/administration
+.. _`Cyborg Institute`: http://cyborginstitute.org/
+
+Meta
+----
+
+Current
+~~~~~~~
+
+In most cases, paths within tychoish.net redirect to pages on
+`tychoish.com`_ wiki, except for the projects outlined
+above. `tychoish.com`_ hosts the majority of tychoish related content,
+and given the use case 
+
+.. _`tychoish.com`: http://tychoish.com
+
+Future
+~~~~~~
+
+In the future, it might make sense to: 
+
+- move the existing tychoish.com content to tychoish.org to highlight
+  and develop the wiki aspect of the site.
+  
+- replace existing `tychogaren.com`_ with a slightly expanded
+  tychoish.net. 
+
+- launch a new blog on tychoish.com using a slightly more
+  contemporary/conventional approximation of a blog.
+
+.. _`tychogaren.com`:http://tychogaren.com
